@@ -1,6 +1,5 @@
 package com.skilldistillery.film.data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Film {
@@ -8,27 +7,37 @@ public class Film {
 	private String title;
 	private String description;
 	private int releaseYear;
+	private int languageId;
+	private int rentalDuration;
+	private double rental_rate;
 	private double length;
-	private String rating;
+	private double replacementCost;
+	private List<String> specialFeatures;
+
+	public enum Rating {
+		PG, G, NC17, PG13, R
+	};
+
 	private List<Actor> listOfActors;
 
-	public List<Actor> getListOfActors() {
-		return new ArrayList<>(listOfActors); // Defensive copy
+	public Film() {
+		super();
 	}
 
-	public void setListOfActors(List<Actor> listOfActors) {
-		this.listOfActors = new ArrayList<>(listOfActors); // Defensive copy
-	}
-
-	public Film(int fimlId, String title, String description, int releaseYear, double length, String rating,
+	public Film(int fimlId, String title, String description, int releaseYear, int languageId, int rentalDuration,
+			double rental_rate, double length, double replacementCost, List<String> specialFeatures,
 			List<Actor> listOfActors) {
 		super();
 		this.fimlId = fimlId;
 		this.title = title;
 		this.description = description;
 		this.releaseYear = releaseYear;
+		this.languageId = languageId;
+		this.rentalDuration = rentalDuration;
+		this.rental_rate = rental_rate;
 		this.length = length;
-		this.rating = rating;
+		this.replacementCost = replacementCost;
+		this.specialFeatures = specialFeatures;
 		this.listOfActors = listOfActors;
 	}
 
@@ -64,6 +73,30 @@ public class Film {
 		this.releaseYear = releaseYear;
 	}
 
+	public int getLanguageId() {
+		return languageId;
+	}
+
+	public void setLanguageId(int languageId) {
+		this.languageId = languageId;
+	}
+
+	public int getRentalDuration() {
+		return rentalDuration;
+	}
+
+	public void setRentalDuration(int rentalDuration) {
+		this.rentalDuration = rentalDuration;
+	}
+
+	public double getRental_rate() {
+		return rental_rate;
+	}
+
+	public void setRental_rate(double rental_rate) {
+		this.rental_rate = rental_rate;
+	}
+
 	public double getLength() {
 		return length;
 	}
@@ -72,23 +105,28 @@ public class Film {
 		this.length = length;
 	}
 
-	public String getRating() {
-		return rating;
+	public double getReplacementCost() {
+		return replacementCost;
 	}
 
-	public void setRating(String rating) {
-		this.rating = rating;
+	public void setReplacementCost(double replacementCost) {
+		this.replacementCost = replacementCost;
 	}
 
-	public Film() {
-		super();
-		// TODO Auto-generated constructor stub
+	public List<String> getSpecialFeatures() {
+		return specialFeatures;
 	}
 
-	@Override
-	public String toString() {
-		return "Film [fimlId=" + fimlId + ", title=" + title + ", description=" + description + ", releaseYear="
-				+ releaseYear + ", length=" + length + ", rating=" + rating + "]";
+	public void setSpecialFeatures(List<String> specialFeatures) {
+		this.specialFeatures = specialFeatures;
+	}
+
+	public List<Actor> getListOfActors() {
+		return listOfActors;
+	}
+
+	public void setListOfActors(List<Actor> listOfActors) {
+		this.listOfActors = listOfActors;
 	}
 
 	@Override
@@ -113,20 +151,14 @@ public class Film {
 		return true;
 	}
 
-	public boolean addActor(Actor actor) {
-		if (listOfActors == null) {
-			listOfActors = new ArrayList<>();
-		}
-		return listOfActors.add(actor);
+	@Override
+	public String toString() {
+		return "Film fimlId: " + fimlId + ", title: " + title + ", description: " + description + ", releaseYear: "
+				+ releaseYear + ", languageId: " + languageId + ", rentalDuration: " + rentalDuration + ", rental_rate: "
+				+ rental_rate + ", length: " + length + ", replacementCost: " + replacementCost + ", specialFeatures: "
+				+ specialFeatures + ", listOfActors: " + listOfActors;
 	}
-
-	public boolean removeActor(Actor actor) {
-		if (listOfActors != null) {
-			return listOfActors.remove(actor);
-
-		} else {
-			return false;
-		}
-	}
+	
+	
 
 }

@@ -76,26 +76,13 @@ public class FilmDaoDbImpl implements FilmDAO {
 		try {
 			Connection conn = DriverManager.getConnection(url, user, pass);
 			String sqlFilm = " SELECT id, title, description, release_year, length, rating from film WHERE id IN(SELECT film_id from film_actor WHERE actor_id IN(SELECT id from actor where first_name = ?))";
-//			String sqlActorsInFilm = "SELECT id, first_name, last_name FROM actor WHERE id IN (SELECT actor_id FROM film_actor WHERE film_id = ?)";
-			
-//			PreparedStatement stmtActors = conn.prepareStatement(sqlActorsInFilm);
+
 			PreparedStatement stmtFilm = conn.prepareStatement(sqlFilm);
-			
-//			stmtActors.setString(1, actorName);
+
 			stmtFilm.setString(1, actorName);
 			ResultSet rsF = stmtFilm.executeQuery();
-//			ResultSet rsA = stmtActors.executeQuery();
-//			while (rsA.next()) {
-//				
-//				Actor actor = new Actor();
-//				actor.setId(rsA.getInt(1));
-//				actor.setFirstName(rsA.getString(2));
-//				actor.setFirstName(rsA.getString(3));
-//				actorList.add(actor);
-//				
-//			}
-			
-			while(rsF.next()) {
+
+			while (rsF.next()) {
 				Film film = new Film();
 				film.setFimlId(rsF.getInt(1));
 				film.setTitle(rsF.getString(2));
@@ -107,14 +94,12 @@ public class FilmDaoDbImpl implements FilmDAO {
 				titleList.add(film);
 			}
 
-//			rsA.close();
-//			stmtActors.close();
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return titleList;	
-		
+		return titleList;
+
 	}
 
 	@Override
@@ -124,13 +109,13 @@ public class FilmDaoDbImpl implements FilmDAO {
 		try {
 			Connection conn = DriverManager.getConnection(url, user, pass);
 			String sqlActorsInFilm = "SELECT id, first_name, last_name FROM actor WHERE id IN (SELECT actor_id FROM film_actor WHERE film_id IN(SELECT id from film where title = ?))";
-			
+
 			PreparedStatement stmtActors = conn.prepareStatement(sqlActorsInFilm);
-			
+
 			stmtActors.setString(1, filmName);
 			ResultSet rsA = stmtActors.executeQuery();
 			while (rsA.next()) {
-				
+
 				Actor actor = new Actor();
 				actor.setId(rsA.getInt(1));
 				actor.setFirstName(rsA.getString(2));
@@ -138,19 +123,20 @@ public class FilmDaoDbImpl implements FilmDAO {
 				actor.setFilmList(titleList);
 				System.out.println(actor);
 				actorList.add(actor);
-				
+
 			}
-			
-			
+
 			rsA.close();
 			stmtActors.close();
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return actorList;	
+		return actorList;
 	}
 	
-	
+	public void addFilm(Film film) {
+		
+	}
 
 }
