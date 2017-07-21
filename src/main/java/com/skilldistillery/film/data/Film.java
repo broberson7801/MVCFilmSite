@@ -1,5 +1,6 @@
 package com.skilldistillery.film.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Film {
@@ -10,18 +11,14 @@ public class Film {
 	private double length;
 	private String rating;
 	private List<Actor> listOfActors;
-	
-	
 
 	public List<Actor> getListOfActors() {
-		return listOfActors;
+		return new ArrayList<>(listOfActors); // Defensive copy
 	}
 
 	public void setListOfActors(List<Actor> listOfActors) {
-		this.listOfActors = listOfActors;
+		this.listOfActors = new ArrayList<>(listOfActors); // Defensive copy
 	}
-
-	
 
 	public Film(int fimlId, String title, String description, int releaseYear, double length, String rating,
 			List<Actor> listOfActors) {
@@ -83,8 +80,6 @@ public class Film {
 		this.rating = rating;
 	}
 
-	
-
 	public Film() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -100,14 +95,7 @@ public class Film {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + fimlId;
-		long temp;
-		temp = Double.doubleToLongBits(length);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
-		result = prime * result + releaseYear;
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
 
@@ -120,28 +108,25 @@ public class Film {
 		if (getClass() != obj.getClass())
 			return false;
 		Film other = (Film) obj;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
 		if (fimlId != other.fimlId)
 			return false;
-		if (Double.doubleToLongBits(length) != Double.doubleToLongBits(other.length))
-			return false;
-		if (rating == null) {
-			if (other.rating != null)
-				return false;
-		} else if (!rating.equals(other.rating))
-			return false;
-		if (releaseYear != other.releaseYear)
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
 		return true;
+	}
+
+	public boolean addActor(Actor actor) {
+		if (listOfActors == null) {
+			listOfActors = new ArrayList<>();
+		}
+		return listOfActors.add(actor);
+	}
+
+	public boolean removeActor(Actor actor) {
+		if (listOfActors != null) {
+			return listOfActors.remove(actor);
+
+		} else {
+			return false;
+		}
 	}
 
 }

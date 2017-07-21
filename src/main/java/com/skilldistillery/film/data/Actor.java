@@ -9,7 +9,6 @@ public class Actor {
 	private String lastName;
 	private List<Film> filmList;
 	private List<Integer> filmsPerformed;
-	
 
 	public List<Integer> getFilmsPerformed() {
 		return filmsPerformed;
@@ -70,10 +69,7 @@ public class Actor {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((filmList == null) ? 0 : filmList.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		return result;
 	}
 
@@ -86,26 +82,10 @@ public class Actor {
 		if (getClass() != obj.getClass())
 			return false;
 		Actor other = (Actor) obj;
-		if (filmList == null) {
-			if (other.filmList != null)
-				return false;
-		} else if (!filmList.equals(other.filmList))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
 		if (id != other.id)
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
 			return false;
 		return true;
 	}
-
 
 	public Actor() {
 		super();
