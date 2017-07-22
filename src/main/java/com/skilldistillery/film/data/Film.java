@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Film {
 	
-	private int fimlId;
+	private int filmId;
 	private String title;
 	private String description;
 	//private int releaseYear calendar.set(Calendar.YEAR);
@@ -22,9 +22,10 @@ public class Film {
 		super();
 	}
 
-	public Film(String title, String description, int releaseYear, int languageId, int rentalDuration,
+	public Film(int filmId, String title, String description, int releaseYear, int languageId, int rentalDuration,
 			double rentalRate, double length, double replacementCost, String rating, String specialFeatures) {
 		super();
+		this.filmId = filmId;
 		this.title = title;
 		this.description = description;
 		this.releaseYear = releaseYear;
@@ -46,12 +47,12 @@ public class Film {
 		this.rating = rating;
 	}
 
-	public int getFimlId() {
-		return fimlId;
+	public int getFilmId() {
+		return filmId;
 	}
 
 	public void setFimlId(int fimlId) {
-		this.fimlId = fimlId;
+		this.filmId = fimlId;
 	}
 
 	public String getTitle() {
@@ -138,7 +139,7 @@ public class Film {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + fimlId;
+		result = prime * result + filmId;
 		return result;
 	}
 
@@ -151,14 +152,14 @@ public class Film {
 		if (getClass() != obj.getClass())
 			return false;
 		Film other = (Film) obj;
-		if (fimlId != other.fimlId)
+		if (filmId != other.filmId)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Film fimlId: " + fimlId + ", title: " + title + ", description: " + description + ", releaseYear: "
+		return "Film filmId: " + filmId + ", title: " + title + ", description: " + description + ", releaseYear: "
 				+ releaseYear + ", languageId: " + languageId + ", rentalDuration: " + rentalDuration
 				+ ", rentalRate: " + rentalRate + ", length: " + length + ", replacementCost: " + replacementCost
 				+ ", rating: " + rating + ", specialFeatures: " + specialFeatures + ", listOfActors: " + listOfActors;
