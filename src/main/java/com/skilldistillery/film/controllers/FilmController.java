@@ -1,5 +1,6 @@
 package com.skilldistillery.film.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,24 @@ public class FilmController {
 		mv.addObject("filmList", filmList);		
 		return mv;
 	}
-
+	@RequestMapping(path="addFilm.do")
+	public ModelAndView addFilm(@RequestParam("title") String title, @RequestParam("description") String description, 
+			@RequestParam("releaseYear") int releaseYear, @RequestParam("languageId") int languageId,
+			@RequestParam("rentalDuration") int rentalDuration, @RequestParam("rentalRate") double rentalRate,
+			@RequestParam("length") double length, @RequestParam("replacementCost") double replacementCost,
+			@RequestParam("rating") String rating, @RequestParam("specialFeatures") String specialFeatures) {
+		String viewName = "WEB-INF/views/AddFilm.jsp";
+		ModelAndView mv = new ModelAndView(viewName);
+		Film film = new Film(title, description, releaseYear, languageId, rentalDuration, rentalRate, length, replacementCost, rating, specialFeatures);
+		dao.addFilm(film);
+		mv.addObject("film", film);
+		return mv;
+	}
+	@RequestMapping(path="addFilmForm.do")
+	public ModelAndView addFilmForm() {
+		String viewName = "WEB-INF/views/AddFilm.jsp";
+		ModelAndView mv = new ModelAndView(viewName);
+		return mv;
+	}
 
 }

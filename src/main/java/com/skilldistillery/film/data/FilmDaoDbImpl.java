@@ -8,10 +8,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.jdbc.Statement;
+
 public class FilmDaoDbImpl implements FilmDAO {
 	private static String url = "jdbc:mysql://localhost:3306/sdvid";
 	private String user = "student";
 	private String pass = "student";
+	private int updateCount;
 
 	public FilmDaoDbImpl() {
 		try {
@@ -135,8 +138,42 @@ public class FilmDaoDbImpl implements FilmDAO {
 		return actorList;
 	}
 	
-	public void addFilm(Film film) {
-		
+	public Film addFilm(Film film)  {
+		Connection conn = null;
+		  try {
+		    conn = DriverManager.getConnection(url, user, pass);
+		    conn.setAutoCommit(false); // START TRANSACTION
+		    String sql = "INSERT INTO film (title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost, rating, special_features) "
+		                     + " VALUES (?,?,?,?,?,?,?,?,?,?)";
+		    PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		    
+		    stmt.setString(1, film.getTitle());
+		    stmt.setString(2, film.getDescription());
+		    stmt.setInt(3, film.getReleaseYear());
+		    stmt.setInt(4, film.getLanguageId());
+		    stmt.setInt(5, film.getRentalDuration());
+		    stmt.setDouble(6, film.getRentalRate());
+		    stmt.setDouble(7, film.getLength());
+		    stmt.setDouble(8, film.getReplacementCost());
+		    stmt.setString(9, film.getRating());
+		    stmt.setString(10, film.getSpecialFeatures());
+		    updateCount = stmt.executeUpdate();
+		    conn.commit(); // COMMIT TRANSACTION
+		    
+		    
+		  } catch (SQLException sqle) {
+		    sqle.printStackTrace();
+		    if (conn != null) {
+		      try { conn.rollback(); }
+		      catch (SQLException sqle2) {
+		        System.err.println("Error trying to rollback");
+		      }
+		    }
+		    throw new RuntimeException("Error inserting film " + film);
+		  }
+		  return film;
+		}
+	
 	}
 
-}
+

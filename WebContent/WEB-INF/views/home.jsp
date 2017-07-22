@@ -58,5 +58,8 @@
 			</c:forEach>
 		</c:when>
 	</c:choose>
+	<form action="addFilmForm.do">
+	<input type="submit" value="Add A film"  /> 
+    </form>
 </body>
 </html>

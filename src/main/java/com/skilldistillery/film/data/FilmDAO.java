@@ -7,6 +7,6 @@ public interface FilmDAO {
 	List<String> getFilmByKeyword(String keyword);
 	List<Actor> actorBasedOnFilmName(String filmName);
 	List<Film> filmBasedOnActorName(String actorName);
-	void addFilm(Film film);
+	Film addFilm(Film film);
 
 }
