@@ -1,6 +1,5 @@
 package com.skilldistillery.film.controllers;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class FilmController {
 	public ModelAndView getFilmTitleById(@RequestParam(name = "filmId") Integer filmId) {
 		String viewName = "WEB-INF/views/home.jsp";
 		ModelAndView mv = new ModelAndView(viewName);
-		String title = dao.getFilmTitleById(filmId);
+		Film title = dao.getFilmTitleById(filmId);
 		mv.addObject("filmTitle", title);
 		mv.addObject("filmId", filmId);
 		return mv;
@@ -38,7 +37,7 @@ public class FilmController {
 	public ModelAndView getFilmByKeyword(@RequestParam(name = "searchId") String keyword) {
 		String viewName = "WEB-INF/views/home.jsp";
 		ModelAndView mv = new ModelAndView(viewName);
-		List<String> titleList = dao.getFilmByKeyword(keyword);
+		List<Film> titleList = dao.getFilmByKeyword(keyword);
 		mv.addObject("keyword", keyword);
 		mv.addObject("filmTitleList", titleList);
 		return mv;
@@ -64,22 +63,39 @@ public class FilmController {
 		return mv;
 	}
 	@RequestMapping(path="addFilm.do")
-	public ModelAndView addFilm(@RequestParam("title") String title, @RequestParam("description") String description, 
-			@RequestParam("releaseYear") int releaseYear, @RequestParam("languageId") int languageId,
-			@RequestParam("rentalDuration") int rentalDuration, @RequestParam("rentalRate") double rentalRate,
-			@RequestParam("length") double length, @RequestParam("replacementCost") double replacementCost,
-			@RequestParam("rating") String rating, @RequestParam("specialFeatures") String specialFeatures) {
+	public ModelAndView addFilm(Film film ) {
 		String viewName = "WEB-INF/views/AddFilm.jsp";
 		ModelAndView mv = new ModelAndView(viewName);
-		Film film = new Film(title, description, releaseYear, languageId, rentalDuration, rentalRate, length, replacementCost, rating, specialFeatures);
+		
+			
 		dao.addFilm(film);
 		mv.addObject("film", film);
+		mv.addObject("id", film.getFilmId());
 		return mv;
 	}
 	@RequestMapping(path="addFilmForm.do")
 	public ModelAndView addFilmForm() {
 		String viewName = "WEB-INF/views/AddFilm.jsp";
 		ModelAndView mv = new ModelAndView(viewName);
+		return mv;
+	}
+	
+	@RequestMapping(path="deleteFilm")
+	public ModelAndView deleteFilm(Integer filmId) {
+		String viewName = "WEB-INF/views/AddFilm.jsp";
+		dao.deleteFilm(filmId);
+		ModelAndView mv = new ModelAndView(viewName);
+		return mv;
+	}
+	
+	
+	@RequestMapping(path="goToEditForm.do")
+	public ModelAndView goToEditForm(@RequestParam(name="id") int id) {
+		String viewName = "WEB-INF/views/AddFilm.jsp";
+		ModelAndView mv = new ModelAndView(viewName);
+		Film film = dao.getFilmTitleById(id);
+		mv.addObject("edit", film);
+		
 		return mv;
 	}
 

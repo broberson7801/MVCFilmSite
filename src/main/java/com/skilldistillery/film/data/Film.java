@@ -1,29 +1,28 @@
 package com.skilldistillery.film.data;
 
-import java.util.Calendar;
 import java.util.List;
 
 public class Film {
-	
-	private int filmId;
+
+	private Integer filmId;
 	private String title;
 	private String description;
-	//private int releaseYear calendar.set(Calendar.YEAR);
-	private int releaseYear = Calendar.YEAR;
-	private int languageId;
-	private int rentalDuration;
-	private double rentalRate;
-	private double length;
-	private double replacementCost;
+	private Integer releaseYear;
+	private Integer languageId;
+	private Integer rentalDuration;;
+	private Double rentalRate;
+	private Double length;
+	private Double replacementCost;
 	private String rating;
 	private String specialFeatures;
 	private List<Actor> listOfActors;
+
 	public Film() {
 		super();
 	}
 
-	public Film(int filmId, String title, String description, int releaseYear, int languageId, int rentalDuration,
-			double rentalRate, double length, double replacementCost, String rating, String specialFeatures) {
+	public Film(Integer filmId, String title, String description, Integer releaseYear, Integer languageId, Integer rentalDuration,
+			Double rentalRate, Double length, Double replacementCost, String rating, String specialFeatures) {
 		super();
 		this.filmId = filmId;
 		this.title = title;
@@ -39,6 +38,10 @@ public class Film {
 
 	}
 
+	public void setFilmId(int filmId) {
+		this.filmId = filmId;
+	}
+
 	public String getRating() {
 		return rating;
 	}
@@ -47,11 +50,11 @@ public class Film {
 		this.rating = rating;
 	}
 
-	public int getFilmId() {
+	public Integer getFilmId() {
 		return filmId;
 	}
 
-	public void setFimlId(int fimlId) {
+	public void setFimlId(Integer fimlId) {
 		this.filmId = fimlId;
 	}
 
@@ -71,43 +74,43 @@ public class Film {
 		this.description = description;
 	}
 
-	public int getReleaseYear() {
+	public Integer getReleaseYear() {
 		return releaseYear;
 	}
 
-	public void setReleaseYear(int releaseYear) {
+	public void setReleaseYear(Integer releaseYear) {
 		this.releaseYear = releaseYear;
 	}
 
-	public int getLanguageId() {
+	public Integer getLanguageId() {
 		return languageId;
 	}
 
-	public void setLanguageId(int languageId) {
+	public void setLanguageId(Integer languageId) {
 		this.languageId = languageId;
 	}
 
-	public int getRentalDuration() {
+	public Integer getRentalDuration() {
 		return rentalDuration;
 	}
 
-	public void setRentalDuration(int rentalDuration) {
+	public void setRentalDuration(Integer rentalDuration) {
 		this.rentalDuration = rentalDuration;
 	}
 
-	public double getRentalRate() {
+	public Double getRentalRate() {
 		return rentalRate;
 	}
 
-	public void setRentalRate(double rentalRate) {
+	public void setRentalRate(Double rentalRate) {
 		this.rentalRate = rentalRate;
 	}
 
-	public double getLength() {
+	public Double getLength() {
 		return length;
 	}
 
-	public void setLength(double length) {
+	public void setLength(Double length) {
 		this.length = length;
 	}
 
@@ -160,9 +163,9 @@ public class Film {
 	@Override
 	public String toString() {
 		return "Film filmId: " + filmId + ", title: " + title + ", description: " + description + ", releaseYear: "
-				+ releaseYear + ", languageId: " + languageId + ", rentalDuration: " + rentalDuration
-				+ ", rentalRate: " + rentalRate + ", length: " + length + ", replacementCost: " + replacementCost
-				+ ", rating: " + rating + ", specialFeatures: " + specialFeatures + ", listOfActors: " + listOfActors;
+				+ releaseYear + ", languageId: " + languageId + ", rentalDuration: " + rentalDuration + ", rentalRate: "
+				+ rentalRate + ", length: " + length + ", replacementCost: " + replacementCost + ", rating: " + rating
+				+ ", specialFeatures: " + specialFeatures + ", listOfActors: " + listOfActors;
 	}
 
 }

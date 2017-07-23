@@ -49,51 +49,6 @@ Special Features<br><br>
 <input TYPE=checkbox name="specialFeatures" VALUE="Commentaries"> Commentaries <BR><br>
 <input type="submit" value="SUBMIT FILM!">
 </form>
-
-<c:if test="${edit != null }">
-
-<h1>EDIT A FILM</h1><br>
-<form action="updateFilm.do">
-Title<input type ="text" name="title" value="${edit.title}"><br>
-Description<input type ="text" name="description" value="${edit.description}"><br>
-Release Year   
-    <select name="releaseYear" value="${edit.releaseYear}">
-   <% for(int i = 1986; i<=2017; i++){%>
-   
-    	<option>		<%=i %> </option>
-    <%}%>
-    </select><br>
-Language ID
-<select name="languageId" value="${edit.languageId}">
-	<% for(int i = 1; i<=6; i++){%>
-   
-    	<option>		<%=i %> </option>
-    <%}%>
-
-</select><br>
-Rental Duration<input type ="text" name="rentalDuration" value="${edit.rentalDuration}"><br>
-Rental Rate<input type ="text"name="rentalRate" value="${edit.rentalRate}"><br>
-Length<input type ="text" name="length" value="${edit.length}"><br>
-Replacement Cost<input type ="text" name="replacementCost"><br>
-Rating
-<select name="rating" value="${edit.rating}">
-   
-    	<option>	G</option>
-    	<option>	PG</option>
-    	<option>	NC17</option>
-    	<option>	PG13</option>
-    	<option>	R</option>
-
-</select><br>
-
-Special Features<br><br>
-<input TYPE=checkbox name= "specialFeatures" VALUE="Behind the Scenes"> Behind the Scenes <BR>
-<input TYPE=checkbox name="specialFeatures" VALUE="Deleted Scenes"> Deleted Scenes <BR>
-<input TYPE=checkbox name="specialFeatures" VALUE="Trailers"> Trailers <BR>
-<input TYPE=checkbox name="specialFeatures" VALUE="Commentaries"> Commentaries <BR><br>
-<input type="submit" value="EDIT FILM!">
-</form>
-</c:if>
 <div id="film-added">
 	<c:choose>
 		<c:when test="${! empty film}">
@@ -111,5 +66,13 @@ Special Features<br><br>
 <input type="submit" value="DELETE">
 </form>
 </div>
+<h1>UPDATE A FILM</h1>
+<div>
+<h3>Enter The ID Of The Film To Be Updated</h3>
+<form action="updateFilm.do">
+<input type="text" name ="film">
+</form>
+</div>
+
 </body>
 </html>

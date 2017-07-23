@@ -16,7 +16,7 @@
 	</form>
 	<c:choose>
 		<c:when test="${filmTitle !=null }">
-			<h3>${filmTitle }</h3>
+			<h3>${filmTitle.title }</h3>
 		</c:when>
 	</c:choose>
 	<form action="getTitleByKeyword.do">
@@ -24,8 +24,8 @@
 			type="submit" value="Search By Keyword">
 	</form>
 	<form action="getActorBasedOnFilmName.do">
-		<input type="text" name="filmName" value="${filmName}"> <input type="submit"
-			value="Get Actors By Film Name">
+		<input type="text" name="filmName" value="${filmName}"> <input
+			type="submit" value="Get Actors By Film Name">
 		<c:choose>
 			<c:when test="${actorList != null}">
 				<c:forEach items="${actorList}" var="actor">
@@ -42,6 +42,10 @@
 				<ul>
 					<li>${title}</li>
 				</ul>
+				<form action="goToEditForm.do">
+					<input type="hidden" name="id" value="${title.filmId }"/>
+					<input type="submit"  value="Edit"/>
+				</form>
 			</c:forEach>
 		</c:when>
 	</c:choose>
@@ -56,10 +60,14 @@
 					<li>${actor.title},${actor.description}</li>
 				</ul>
 			</c:forEach>
+		
 		</c:when>
 	</c:choose>
 	<form action="addFilmForm.do">
-	<input type="submit" value="Add A film"  /> 
+	<input type="submit" value="Add Or Delete A Film"  /> 
     </form>
+    
+    
+ 
 </body>
 </html>
