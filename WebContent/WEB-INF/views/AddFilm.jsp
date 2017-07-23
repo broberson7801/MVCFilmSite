@@ -54,27 +54,15 @@ Special Features<br><br>
 
 <h1>EDIT A FILM</h1><br>
 <form action="updateFilm.do">
+Film ID: < name="filmID" ${edit.filmId}><br>
 Title<input type ="text" name="title" value="${edit.title}"><br>
 Description<input type ="text" name="description" value="${edit.description}"><br>
-Release Year   
-    <select name="releaseYear" value="${edit.releaseYear}">
-   <% for(int i = 1986; i<=2017; i++){%>
-   
-    	<option>		<%=i %> </option>
-    <%}%>
-    </select><br>
-Language ID
-<select name="languageId" value="${edit.languageId}">
-	<% for(int i = 1; i<=6; i++){%>
-   
-    	<option>		<%=i %> </option>
-    <%}%>
-
-</select><br>
+Release Year<input type="text" name="releaseYear" value="${edit.releaseYear}"><br>
+Language ID<input type="text" name="languageId" value="${edit.languageId}"><br>
 Rental Duration<input type ="text" name="rentalDuration" value="${edit.rentalDuration}"><br>
 Rental Rate<input type ="text"name="rentalRate" value="${edit.rentalRate}"><br>
 Length<input type ="text" name="length" value="${edit.length}"><br>
-Replacement Cost<input type ="text" name="replacementCost"><br>
+Replacement Cost<input type ="text" name="replacementCost" value="${edit.replacementCost}"><br>
 Rating
 <select name="rating" value="${edit.rating}">
    
@@ -91,7 +79,9 @@ Special Features<br><br>
 <input TYPE=checkbox name="specialFeatures" VALUE="Deleted Scenes"> Deleted Scenes <BR>
 <input TYPE=checkbox name="specialFeatures" VALUE="Trailers"> Trailers <BR>
 <input TYPE=checkbox name="specialFeatures" VALUE="Commentaries"> Commentaries <BR><br>
+
 <input type="submit" value="EDIT FILM!">
+
 </form>
 </c:if>
 <div id="film-added">

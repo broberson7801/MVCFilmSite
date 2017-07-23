@@ -98,5 +98,15 @@ public class FilmController {
 		
 		return mv;
 	}
+	
+	@RequestMapping(path="updateFilm.do")
+	public ModelAndView updateFilm(Film film) {
+		System.out.println("In Update Film in Controller");
+		String viewName="WEB-INF/views/AddFilm.jsp";
+		ModelAndView mv = new ModelAndView(viewName);
+		dao.updateFilm(film);
+		mv.addObject("filmUpdate", film);
+		return mv;
+	}
 
 }

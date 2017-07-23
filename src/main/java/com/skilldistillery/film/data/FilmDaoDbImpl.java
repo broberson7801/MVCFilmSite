@@ -30,12 +30,23 @@ public class FilmDaoDbImpl implements FilmDAO {
 		Film film = new Film();
 		try {
 			Connection conn = DriverManager.getConnection(url, user, pass);
-			String sql = "SELECT title FROM film WHERE id = ?";
+			String sql = "SELECT * FROM film WHERE id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
-				film.setTitle(rs.getString(1));
+				film.setFilmId(rs.getInt(1));
+				film.setTitle(rs.getString(2));
+				film.setDescription(rs.getString(3));
+				film.setReleaseYear(rs.getInt(4));
+				film.setLanguageId(rs.getInt(5));
+				film.setRentalDuration(rs.getInt(6));
+				film.setRentalRate(rs.getDouble(7));
+				film.setLength(rs.getDouble(8));
+				film.setReplacementCost(rs.getDouble(9));
+				film.setRating(rs.getString(10));
+				film.setSpecialFeatures(rs.getString(11));
+
 			}
 			rs.close();
 			stmt.close();
@@ -225,9 +236,10 @@ public class FilmDaoDbImpl implements FilmDAO {
 		try {
 			conn = DriverManager.getConnection(url, user, pass);
 			conn.setAutoCommit(false); // START TRANSACTION
-			String sql = "UPDATE actor SET title=?, description=?, release_year=?, language_id=?, rental_duration=?, rental_rate=?, length=?, replacement_cost=?, rating=?, special_features=? "
-					+ " WHERE id=?";
+			String sql = "UPDATE film SET title=?, description=?, release_year=?, language_id=?, rental_duration=?, rental_rate=?, length=?, replacement_cost=?, rating=?, special_features=? "
+					+ " WHERE title=?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
+			System.out.println("updateFilm method in impl, after the sql update statement");
 			stmt.setString(1, film.getTitle());
 			stmt.setString(2, film.getDescription());
 			stmt.setInt(3, film.getReleaseYear());
@@ -238,11 +250,27 @@ public class FilmDaoDbImpl implements FilmDAO {
 			stmt.setDouble(8, film.getReplacementCost());
 			stmt.setString(9, film.getRating());
 			stmt.setString(10, film.getSpecialFeatures());
-			stmt.setInt(11, film.getFilmId());
+			stmt.setString(11, film.getTitle());
 			int updateCount = stmt.executeUpdate();
+			if (updateCount == 1) {
+				sql = "INSERT INTO film (title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost, rating, special_features) "
+						+ "VALUES (?,?,?,?,?,?,?,?,?,?)  WHERE title=?" ;
+				System.out.println("in updateFilm method in impl, after the sql insert statement");
+				stmt.setString(1, film.getTitle());
+				stmt.setString(2, film.getDescription());
+				stmt.setInt(3, film.getReleaseYear());
+				stmt.setInt(4, film.getLanguageId());
+				stmt.setInt(5, film.getRentalDuration());
+				stmt.setDouble(6, film.getRentalRate());
+				stmt.setDouble(7, film.getLength());
+				stmt.setDouble(8, film.getReplacementCost());
+				stmt.setString(9, film.getRating());
+				stmt.setString(10, film.getSpecialFeatures());
+				stmt.setString(11, film.getTitle());
+				updateCount = stmt.executeUpdate();
 
-			conn.commit(); // COMMIT TRANSACTION
-
+				conn.commit(); // COMMIT TRANSACTION
+			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 			if (conn != null) {
