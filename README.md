@@ -2,7 +2,7 @@
 
 RUNNING THE PROGRAM
 
-Follow the prompts on the buttons. Note there is no validation, so if invalid entries are entered, the program will break.
+Follow the prompts on the buttons. Note there is no validation, so if the user asks "If I type this into this field, will the program break?" The answer will be yes, 100% of the time. 
 
 WHO DID THE PROJECT -> 
 
