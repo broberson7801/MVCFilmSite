@@ -7,12 +7,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Home Page</title>
 </head>
 <body>
 	<form action="getTitle.do">
 		<input type="text" name="filmId" value="${filmId}"> <input
-			type="submit" value="Look Up Film">
+			type="submit" value="Look Up Film By ID">
 	</form>
 	<c:choose>
 		<c:when test="${filmTitle !=null }">
@@ -21,7 +21,7 @@
 	</c:choose>
 	<form action="getTitleByKeyword.do">
 		<input type="text" name="searchId" value="${keyword}"> <input
-			type="submit" value="Search By Keyword">
+			type="submit" value="Search By Keyword And Edit Any Of The Films That Come Up From The Search">
 	</form>
 	<form action="getActorBasedOnFilmName.do">
 		<input type="text" name="filmName" value="${filmName}"> <input

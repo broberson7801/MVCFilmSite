@@ -54,8 +54,8 @@ Special Features<br><br>
 
 <h1>EDIT A FILM</h1><br>
 <form action="updateFilm.do">
-Film ID: < name="filmID" ${edit.filmId}><br>
-Title<input type ="text" name="title" value="${edit.title}"><br>
+Film ID: <input type="hidden" name="filmId" value="${edit.filmId}">${edit.filmId}<br>
+Title: <input type="text" name="title" value="${edit.title}"><br>
 Description<input type ="text" name="description" value="${edit.description}"><br>
 Release Year<input type="text" name="releaseYear" value="${edit.releaseYear}"><br>
 Language ID<input type="text" name="languageId" value="${edit.languageId}"><br>
